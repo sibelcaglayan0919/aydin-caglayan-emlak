@@ -248,7 +248,11 @@
     document.querySelectorAll("[data-hero-title]").forEach(function (el) { el.textContent = pick(SITE.hero.title); });
     document.querySelectorAll("[data-hero-sub]").forEach(function (el) { el.textContent = pick(SITE.hero.subtitle); });
     document.querySelectorAll("[data-hero-eyebrow]").forEach(function (el) { el.textContent = pick(SITE.hero.eyebrow); });
-    document.querySelectorAll("[data-tel-link]").forEach(function (el) { el.setAttribute("href", telLink()); });
+    document.querySelectorAll("[data-tel-link]").forEach(function (el) {
+      el.setAttribute("href", telLink());
+      // Metin CSS ile gizlense bile ekran okuyucular için erişilebilir isim garanti edilir
+      el.setAttribute("aria-label", t("btn_call") + ": " + SITE.phone);
+    });
     document.querySelectorAll("[data-tel-text]").forEach(function (el) { el.textContent = SITE.phone; });
     document.querySelectorAll("[data-wa-link]").forEach(function (el) { el.setAttribute("href", waLink(t("wa_default_msg"))); });
     document.querySelectorAll("[data-region-text]").forEach(function (el) { el.textContent = pick(SITE.region); });
