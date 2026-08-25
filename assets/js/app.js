@@ -92,7 +92,7 @@
     const msg = t("wa_property_msg").replace("{title}", pick(p.title));
     return (
       '<article class="property-card reveal">' +
-        '<a href="ilan.html?id=' + encodeURIComponent(p.id) + '" class="property-media" aria-label="' + pick(p.title) + '">' +
+        '<a href="ilan.html?id=' + encodeURIComponent(p.id) + '" class="property-media" aria-label="' + propertyStatusLabel(p.status) + ': ' + pick(p.title) + '">' +
           '<span class="property-badge">' + propertyStatusLabel(p.status) + '</span>' +
           '<img src="' + img + '" alt="' + pick(p.title) + '" loading="lazy" width="480" height="360">' +
         '</a>' +
