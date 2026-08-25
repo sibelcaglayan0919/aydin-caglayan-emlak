@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">İlan Detayı | Emlak Danışmanı</title>
+<meta name="description" content="Mülk ilan detayları">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a href="#main" class="skip-link">İçeriğe geç</a>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand"><span data-site-name>AD SOYAD</span></a>
+    <nav class="main-nav" aria-label="Ana menü">
+      <ul>
+        <li><a href="index.html#hero" data-i18n="nav_home">Anasayfa</a></li>
+        <li><a href="index.html#ilanlar" data-i18n="nav_properties">İlanlar</a></li>
+        <li><a href="index.html#hakkimda" data-i18n="nav_about">Hakkımda</a></li>
+        <li><a href="index.html#iletisim" data-i18n="nav_contact">İletişim</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="tel-link" data-tel-link href="tel:">
+        <span data-icon="phone"></span>
+        <span data-tel-text>Telefon</span>
+      </a>
+      <div class="lang-switch" role="group" aria-label="Dil seçimi">
+        <button type="button" data-lang="tr" aria-pressed="true">TR</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="nav-toggle" aria-label="Menüyü aç" aria-expanded="false">
+        <span data-icon="menu"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section style="padding-top: var(--space-5);">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html#ilanlar" data-i18n="detail_back">İlanlara dön</a>
+      </div>
+
+      <div id="detail-content">
+        <!-- JS ile doldurulur -->
+      </div>
+
+      <div id="not-found" class="empty-state" style="display:none;" data-i18n="detail_not_found">İlan bulunamadı.</div>
+    </div>
+  </section>
+
+  <section id="similar-section" style="display:none;">
+    <div class="container">
+      <div class="section-head">
+        <h2 data-i18n="detail_similar">Benzer İlanlar</h2>
+      </div>
+      <div class="property-grid" id="similar-grid"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-row">
+    <div class="footer-copy">&copy; <span id="footer-year"></span> <span data-site-name>AD SOYAD</span> — <span data-i18n="footer_rights">Tüm hakları saklıdır.</span></div>
+    <div class="footer-social">
+      <a href="#" aria-label="Instagram" data-icon="instagram"></a>
+      <a href="#" aria-label="LinkedIn" data-icon="linkedin"></a>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-cta-bar">
+  <div class="row">
+    <a class="call" data-tel-link href="tel:"><span data-icon="phone"></span><span data-i18n="btn_call">Ara</span></a>
+    <a class="wa" id="mobile-wa" href="#" target="_blank" rel="noopener"><span data-icon="whatsapp"></span>WhatsApp</a>
+  </div>
+</div>
+
+<script src="assets/js/site-config.js"></script>
+<script src="assets/js/properties.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/property-detail.js"></script>
+<script>document.getElementById("footer-year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

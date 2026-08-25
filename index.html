@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emlak Danışmanı | Premium Gayrimenkul Danışmanlığı</title>
+<meta name="description" content="Bölgenin en değerli mülklerinde kişisel emlak danışmanlığı. Alım, satım ve kiralama süreçlerinizde güvenilir bir ortak.">
+<meta property="og:title" content="Emlak Danışmanı | Premium Gayrimenkul Danışmanlığı">
+<meta property="og:type" content="website">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a href="#main" class="skip-link">İçeriğe geç</a>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand"><span data-site-name>AD SOYAD</span></a>
+    <nav class="main-nav" aria-label="Ana menü">
+      <ul>
+        <li><a href="#hero" data-i18n="nav_home">Anasayfa</a></li>
+        <li><a href="#ilanlar" data-i18n="nav_properties">İlanlar</a></li>
+        <li><a href="#hakkimda" data-i18n="nav_about">Hakkımda</a></li>
+        <li><a href="#hizmetler" data-i18n="nav_services">Hizmetler</a></li>
+        <li><a href="#yorumlar" data-i18n="nav_testimonials">Yorumlar</a></li>
+        <li><a href="#konum" data-i18n="map_eyebrow">Konum</a></li>
+        <li><a href="#iletisim" data-i18n="nav_contact">İletişim</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="tel-link" data-tel-link href="tel:">
+        <span data-icon="phone"></span>
+        <span data-tel-text>Telefon</span>
+      </a>
+      <div class="lang-switch" role="group" aria-label="Dil seçimi">
+        <button type="button" data-lang="tr" aria-pressed="true">TR</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="nav-toggle" aria-label="Menüyü aç" aria-expanded="false">
+        <span data-icon="menu"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-eyebrow" data-hero-eyebrow>Emlak Danışmanı</div>
+        <h1 data-hero-title>Hayalinizdeki Eve Bir Mesaj Kadar Yakınsınız</h1>
+        <p class="hero-sub" data-hero-sub>Bölgenin en değerli mülklerinde kişisel danışmanlık.</p>
+        <div class="hero-cta">
+          <a class="btn btn-wa" data-wa-link href="#" target="_blank" rel="noopener">
+            <span data-icon="whatsapp"></span>
+            <span data-i18n="hero_cta_whatsapp">WhatsApp'tan Yazın</span>
+          </a>
+          <a class="btn btn-outline" href="#ilanlar">
+            <span data-i18n="hero_cta_properties">İlanları Gör</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GÜVEN BANDI -->
+  <section class="stats-bar">
+    <div class="container">
+      <div class="stats-grid" id="stats-grid"></div>
+    </div>
+  </section>
+
+  <!-- İLANLAR -->
+  <section id="ilanlar">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow" data-i18n="properties_eyebrow">Portföy</div>
+        <h2 data-i18n="properties_title">Öne Çıkan İlanlar</h2>
+        <p data-i18n="properties_sub">Özenle seçilmiş, güncel mülk portföyünden bir seçki.</p>
+      </div>
+
+      <div class="filter-bar">
+        <div class="filter-field">
+          <label for="filter-region" data-i18n="filter_region">Bölge</label>
+          <select id="filter-region"></select>
+        </div>
+        <div class="filter-field">
+          <label for="filter-type" data-i18n="filter_type">Mülk Tipi</label>
+          <select id="filter-type"></select>
+        </div>
+        <div class="filter-field">
+          <label for="filter-budget" data-i18n="filter_budget">Bütçe</label>
+          <select id="filter-budget">
+            <option value="" data-i18n="filter_all">Tümü</option>
+            <option value="0-2000000">0 - 2.000.000</option>
+            <option value="2000000-5000000">2.000.000 - 5.000.000</option>
+            <option value="5000000-10000000">5.000.000 - 10.000.000</option>
+            <option value="10000000-999999999">10.000.000+</option>
+          </select>
+        </div>
+        <button type="button" id="filter-reset" class="btn btn-outline btn-sm filter-reset" data-i18n="filter_reset">Filtreyi Temizle</button>
+      </div>
+
+      <div class="property-grid" id="property-grid"></div>
+    </div>
+  </section>
+
+  <!-- HAKKIMDA -->
+  <section id="hakkimda">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow" data-i18n="about_eyebrow">Hakkımda</div>
+        <h2 data-i18n="about_title">Sizinle Aynı Hedefte</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-photo">
+          <img id="about-photo-img" src="assets/img/agent/placeholder.svg" alt="" width="380" height="507" loading="lazy">
+        </div>
+        <div>
+          <p id="about-story" style="font-size:1.05rem; color:var(--text);"></p>
+          <div class="about-badges" id="about-badges"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HİZMETLER -->
+  <section id="hizmetler" style="background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow" data-i18n="services_eyebrow">Hizmetler</div>
+        <h2 data-i18n="services_title">Nasıl Yardımcı Olabilirim</h2>
+      </div>
+      <div class="services-grid" id="services-grid"></div>
+    </div>
+  </section>
+
+  <!-- YORUMLAR -->
+  <section id="yorumlar">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow" data-i18n="testimonials_eyebrow">Referanslar</div>
+        <h2 data-i18n="testimonials_title">Müşterilerim Ne Diyor</h2>
+      </div>
+      <div class="testimonials-track" id="testimonials-track"></div>
+    </div>
+  </section>
+
+  <!-- KONUM / HARİTA -->
+  <section id="konum">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow" data-i18n="map_eyebrow">Konum</div>
+        <h2 data-i18n="map_title">Nerede Hizmet Veriyorum</h2>
+        <p data-i18n="map_sub">Aydın / Didim ve çevresinde yerinde danışmanlık.</p>
+      </div>
+      <div class="map-wrap reveal">
+        <iframe id="map-frame" src="" title="Hizmet bölgesi haritası" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div style="text-align:center;">
+        <a id="map-open-link" class="map-link" href="#" target="_blank" rel="noopener">
+          <span data-icon="pin"></span>
+          <span data-i18n="map_open">Haritada Aç</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- İLETİŞİM -->
+  <section id="iletisim">
+    <div class="container">
+      <div class="contact-panel">
+        <div class="section-eyebrow" data-i18n="contact_eyebrow">İletişim</div>
+        <h2 data-i18n="contact_title">Hemen Görüşelim</h2>
+        <p data-i18n="contact_sub">Sorularınız için WhatsApp'tan yazabilir ya da doğrudan arayabilirsiniz.</p>
+        <div class="contact-actions">
+          <a class="btn btn-wa" data-wa-link href="#" target="_blank" rel="noopener">
+            <span data-icon="whatsapp"></span>
+            <span data-i18n="hero_cta_whatsapp">WhatsApp'tan Yazın</span>
+          </a>
+          <a class="btn btn-outline" data-tel-link href="tel:">
+            <span data-icon="phone"></span>
+            <span data-i18n="btn_call">Ara</span>
+          </a>
+        </div>
+        <div class="contact-info">
+          <span data-icon="phone"></span><span data-tel-text>Telefon</span>
+          <span data-icon="pin"></span><span data-region-text>Bölge</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-row">
+    <div class="footer-copy">&copy; <span id="footer-year"></span> <span data-site-name>AD SOYAD</span> — <span data-i18n="footer_rights">Tüm hakları saklıdır.</span></div>
+    <div class="footer-social">
+      <a href="#" aria-label="Instagram" data-icon="instagram"></a>
+      <a href="#" aria-label="LinkedIn" data-icon="linkedin"></a>
+    </div>
+  </div>
+</footer>
+
+<!-- Mobil sabit CTA bar -->
+<div class="mobile-cta-bar">
+  <div class="row">
+    <a class="call" data-tel-link href="tel:"><span data-icon="phone"></span><span data-i18n="btn_call">Ara</span></a>
+    <a class="wa" data-wa-link href="#" target="_blank" rel="noopener"><span data-icon="whatsapp"></span>WhatsApp</a>
+  </div>
+</div>
+
+<script src="assets/js/site-config.js"></script>
+<script src="assets/js/properties.js"></script>
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/app.js"></script>
+<script>document.getElementById("footer-year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

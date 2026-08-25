@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 507">
+  <rect width="380" height="507" fill="#1A2129"/>
+  <circle cx="190" cy="200" r="70" fill="#2A3440"/>
+  <path d="M60 460c0-90 60-150 130-150s130 60 130 150" fill="#2A3440"/>
+  <text x="190" y="480" text-anchor="middle" fill="#A8B2BF" font-family="Inter, sans-serif" font-size="14">Portre fotoğrafı eklenecek</text>
+</svg>
