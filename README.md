@@ -76,6 +76,44 @@ Değişiklik yaptıktan sonra dosyayı kaydet, tarayıcıyı yenile — hepsi ot
 
 ---
 
+## 3b. Opsiyonel alanlar — yapı bilgileri ve sanal gezinti
+
+Aynı ilan objesine bu iki alanı da ekleyebilirsin. **İkisi de opsiyonel** — eklemezsen o bölüm sitede hiç görünmez, hiçbir şey bozulmaz.
+
+**`details` — temel yapı bilgileri** (ilan detay sayfasında ayrı bir kutu halinde gösterilir, sadece doldurduğun alanlar görünür):
+
+```js
+details: {
+  floor: 3,           // bulunduğu kat
+  totalFloors: 5,      // binanın toplam kat sayısı
+  buildingAge: 8,       // bina yaşı (yıl)
+  facing: "guney",       // kuzey | guney | dogu | bati | kuzeydogu | kuzeybati | guneydogu | guneybati
+  heating: "kombi"        // kombi | merkezi | klima | yerden | soba
+}
+```
+
+**`tour` — sanal gezinti.** İki yöntemden biri:
+
+```js
+// A) Hazır platform turu — Matterport, Kuula, Google Street View vb. bir yerde tur oluşturup linkini yapıştır
+tour: { type: "embed", url: "https://my.matterport.com/show/?m=XXXX" }
+
+// B) Kendi 360° panorama fotoğrafların
+tour: {
+  type: "360",
+  scenes: [
+    { id: "salon",  title: { tr: "Salon",  en: "Living Room" }, image: "assets/img/properties/villa-deniz-manzarali/360/salon.jpg" },
+    { id: "mutfak", title: { tr: "Mutfak", en: "Kitchen" },     image: "assets/img/properties/villa-deniz-manzarali/360/mutfak.jpg" }
+  ]
+}
+```
+
+360° panorama fotoğrafını ücretsiz çekmenin en kolay yolu: telefonunda **Google Street View** uygulamasını aç → "Fotoğraf Küresi" (Photo Sphere) modunu seç → odanın ortasında dönerek çek → dosyayı `assets/img/properties/<id>/360/` klasörüne kaydet.
+
+`tour` eklenen ilan otomatik olarak kartında **"360° Tur"** rozeti kazanır ve detay sayfasında **"Sanal Gezinti Başlat"** butonu belirir.
+
+---
+
 ## 4. Fotoğraf önerileri
 
 - Her ilan için **en az 5 fotoğraf** yükle (galeri düzeni buna göre tasarlandı)
@@ -111,6 +149,10 @@ assets/js/properties.js    → İlan verileri — yeni ilan eklenecek dosya
 assets/js/i18n.js          → TR/EN arayüz metinleri
 assets/js/app.js           → Anasayfa mantığı (filtre, render, dil)
 assets/js/property-detail.js → İlan detay sayfası mantığı
+assets/js/lightbox.js      → İlan detayında tam ekran fotoğraf galerisi
+assets/js/tour.js          → Sanal gezinti (360°/gömülü tur) görüntüleyici
+assets/js/chat.js          → Scriptli asistan (yapay zeka DEĞİL, ücretsiz, API anahtarı yok)
+assets/vendor/pannellum/   → 360° görüntüleyici kütüphanesi (yalnızca `tour.type: "360"` kullanan bir ilan olduğunda yüklenir)
 assets/img/agent/          → Danışman portresi
 assets/img/properties/     → İlan fotoğrafları (ilan başına bir klasör)
 ```
@@ -122,4 +164,5 @@ assets/img/properties/     → İlan fotoğrafları (ilan başına bir klasör)
 - Site **iki dilli** (TR/EN) — sağ üstteki düğmeyle değişir, seçim tarayıcıda hatırlanır
 - Mobilde ekranın altında sabit **Ara / WhatsApp** butonları vardır
 - Her ilan kartındaki WhatsApp butonu, danışmana **hangi ilan hakkında** yazıldığını otomatik ileten hazır bir mesajla açılır
+- Sağ altta gördüğün sohbet ikonu **scriptli bir asistan** — fiyat/konum/m²/randevu gibi sık sorulan soruları ilan verisinden otomatik yanıtlar ve "WhatsApp'tan devam et" ile danışmana devreder. Gerçek yapay zeka değildir, sunucu/API maliyeti yoktur.
 - Form/CRM/admin panel bu ilk sürümde yok — tüm talepler WhatsApp'a yönleniyor (bireysel danışmanlık için en hızlı yol)

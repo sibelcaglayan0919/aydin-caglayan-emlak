@@ -3,6 +3,32 @@
    Yeni ilan eklemek için bu dizinin sonuna bir obje daha ekle.
    "id" alanı benzersiz olmalı (Türkçe karakter/boşluk kullanma).
    Görselleri assets/img/properties/<id>/ klasörüne koy.
+
+   OPSİYONEL ALANLAR (doldurmazsan o kısım hiç görünmez, ilan bozulmaz):
+
+   details — temel yapı bilgileri, ilan detay sayfasında ayrı bir
+   tabloda gösterilir. Sadece bildiğin alanları doldur:
+     details: {
+       floor: 3,            // bulunduğu kat
+       totalFloors: 5,       // binanın toplam kat sayısı
+       buildingAge: 8,        // bina yaşı (yıl)
+       facing: "guney",        // kuzey | guney | dogu | bati | kuzeydogu | kuzeybati | guneydogu | guneybati
+       heating: "kombi"         // kombi | merkezi | klima | yerden | soba
+     }
+
+   tour — sanal gezinti. İki yöntemden biri:
+     // A) Hazır platform turu (Matterport, Kuula, Google Street View vb.)
+     tour: { type: "embed", url: "https://my.matterport.com/show/?m=XXXX" }
+     // B) Kendi çektiğin 360° panorama fotoğrafları
+     tour: {
+       type: "360",
+       scenes: [
+         { id: "salon",  title: { tr: "Salon",  en: "Living Room" }, image: "…/360/salon.jpg" },
+         { id: "mutfak", title: { tr: "Mutfak", en: "Kitchen" },     image: "…/360/mutfak.jpg" }
+       ]
+     }
+   360° panorama, telefonda Google Street View uygulamasının "Fotoğraf Küresi"
+   çekim moduyla ücretsiz oluşturulabilir.
    ============================================================ */
 
 const PROPERTIES = [
@@ -23,15 +49,15 @@ const PROPERTIES = [
     area: 65,
     featured: true,
     images: [
-      "assets/img/properties/manzarali-daire-1/1.jpg",
-      "assets/img/properties/manzarali-daire-1/2.jpg",
-      "assets/img/properties/manzarali-daire-1/3.jpg",
-      "assets/img/properties/manzarali-daire-1/4.jpg",
-      "assets/img/properties/manzarali-daire-1/5.jpg",
-      "assets/img/properties/manzarali-daire-1/6.jpg",
-      "assets/img/properties/manzarali-daire-1/7.jpg",
-      "assets/img/properties/manzarali-daire-1/8.jpg",
-      "assets/img/properties/manzarali-daire-1/9.jpg"
+      "https://raw.githubusercontent.com/sibelcaglayan0919/aydin-caglayan-emlak/master/assets/img/properties/manzarali-daire-1/1.jpg",
+      "https://raw.githubusercontent.com/sibelcaglayan0919/aydin-caglayan-emlak/master/assets/img/properties/manzarali-daire-1/2.jpg",
+      "https://raw.githubusercontent.com/sibelcaglayan0919/aydin-caglayan-emlak/master/assets/img/properties/manzarali-daire-1/3.jpg",
+      "https://raw.githubusercontent.com/sibelcaglayan0919/aydin-caglayan-emlak/master/assets/img/properties/manzarali-daire-1/4.jpg",
+      "https://raw.githubusercontent.com/sibelcaglayan0919/aydin-caglayan-emlak/master/assets/img/properties/manzarali-daire-1/5.jpg",
+      "https://raw.githubusercontent.com/sibelcaglayan0919/aydin-caglayan-emlak/master/assets/img/properties/manzarali-daire-1/6.jpg",
+      "https://raw.githubusercontent.com/sibelcaglayan0919/aydin-caglayan-emlak/master/assets/img/properties/manzarali-daire-1/7.jpg",
+      "https://raw.githubusercontent.com/sibelcaglayan0919/aydin-caglayan-emlak/master/assets/img/properties/manzarali-daire-1/8.jpg",
+      "https://raw.githubusercontent.com/sibelcaglayan0919/aydin-caglayan-emlak/master/assets/img/properties/manzarali-daire-1/9.jpg"
     ]
   }
 
@@ -45,6 +71,8 @@ const PROPERTIES = [
   //   location: { tr: "...", en: "..." },
   //   beds: 4, baths: 3, area: 320,
   //   featured: false,
-  //   images: ["assets/img/properties/villa-ornek/1.jpg"]
+  //   images: ["https://raw.githubusercontent.com/sibelcaglayan0919/aydin-caglayan-emlak/master/assets/img/properties/villa-ornek/1.jpg"],
+  //   details: { floor: 0, totalFloors: 2, buildingAge: 3, facing: "guney", heating: "yerden" },
+  //   tour: { type: "embed", url: "https://my.matterport.com/show/?m=XXXX" }
   // }
 ];

@@ -16,10 +16,58 @@
   }
 
   function galleryHtml(p) {
-    const imgs = p.images.slice(0, 5);
-    return imgs.map(function (src, i) {
-      return '<img src="' + src + '" alt="' + window.SiteApp.pick(p.title) + ' - ' + (i + 1) + '" loading="' + (i === 0 ? "eager" : "lazy") + '" width="600" height="450">';
+    const app = window.SiteApp;
+    const total = p.images.length;
+    const shown = p.images.slice(0, 5);
+    // CSS mobilde (≤760px) yalnızca ilk 4 kareyi gösterir (bkz. style.css .detail-gallery
+    // nth-child(n+5) kuralı). Bu yüzden "+N" rozetini masaüstünde 5. karede, mobilde ise
+    // 4. karede de göstermemiz gerekiyor — aksi halde mobil kullanıcı 5-9. fotoğraflara
+    // hiç erişemez. Hangi karede açılırsa açılsın lightbox içinde tüm fotoğraflar arasında
+    // ok tuşlarıyla gezinilebildiği için bu, gerçek bir işlevsellik kaybı yaratmıyor.
+    return shown.map(function (src, i) {
+      const eager = i === 0 ? "eager" : "lazy";
+      const base = app.pick(p.title) + " - " + (i + 1);
+      let badge = null;
+      if (i === 4 && total > 5) badge = "+" + (total - 5);
+      else if (i === 3 && total > 4) badge = "+" + (total - 4);
+
+      const label = badge
+        ? badge + " — " + base + " — " + app.t("detail_gallery_more_hint").replace("{count}", total)
+        : "";
+      const overlay = badge
+        ? '<span class="gallery-more-overlay' + (i === 3 ? ' gallery-more-overlay-mobile' : '') + '" aria-hidden="true">' + badge + '</span>'
+        : "";
+
+      return (
+        '<button type="button" class="gallery-tile" data-lightbox-index="' + i + '"' + (label ? ' aria-label="' + label + '"' : "") + '>' +
+          '<img src="' + src + '" alt="' + (badge ? "" : base) + '" loading="' + eager + '" width="600" height="450">' +
+          overlay +
+        '</button>'
+      );
     }).join("");
+  }
+
+  function featuresHtml(p) {
+    const app = window.SiteApp;
+    const rows = app.detailsRows ? app.detailsRows(p) : [];
+    if (!rows.length) return "";
+    return (
+      '<div class="detail-features reveal">' +
+        '<h3>' + app.t("detail_features_title") + '</h3>' +
+        '<dl class="detail-features-list">' +
+          rows.map(function (r) { return '<div><dt>' + r.label + '</dt><dd>' + r.value + '</dd></div>'; }).join("") +
+        '</dl>' +
+      '</div>'
+    );
+  }
+
+  function wireGallery(p) {
+    document.querySelectorAll("[data-lightbox-index]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        const idx = parseInt(btn.getAttribute("data-lightbox-index"), 10);
+        if (window.SiteLightbox) window.SiteLightbox.open(p.images, idx, window.SiteApp.pick(p.title));
+      });
+    });
   }
 
   function renderDetail() {
@@ -58,6 +106,8 @@
         '<div><strong>' + p.area + '</strong><span>' + app.t("area") + '</span></div>' +
         '<div><strong>' + app.t("type_" + p.type) + '</strong><span>' + app.t("detail_summary_type") + '</span></div>' +
       '</div>' +
+      (window.SiteTour ? window.SiteTour.sectionHtml(p) : "") +
+      featuresHtml(p) +
       '<div class="detail-layout">' +
         '<div><p style="font-size:1.02rem; color:var(--text);">' + app.pick(p.desc) + '</p></div>' +
         '<aside class="agent-card">' +
@@ -72,6 +122,8 @@
     const mobileWa = document.getElementById("mobile-wa");
     if (mobileWa) mobileWa.setAttribute("href", waHref);
 
+    wireGallery(p);
+    if (window.SiteTour) window.SiteTour.wire(p);
     renderSimilar(p);
     app.observeReveals();
   }

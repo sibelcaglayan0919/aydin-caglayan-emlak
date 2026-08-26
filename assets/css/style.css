@@ -639,3 +639,281 @@ section { padding: var(--space-7) 0; }
 .agent-card h3 { font-size: 1.05rem; margin-bottom: 2px; }
 .agent-card .role { font-size: 0.82rem; color: var(--text-muted); margin-bottom: var(--space-3); }
 .agent-card .btn { margin-bottom: 8px; }
+
+/* ============================================================
+   ERİŞİLEBİLİRLİK YARDIMCISI — ekranda görünmez, ekran okuyucuda okunur
+   ============================================================ */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================
+   GALERİ KAREleri (ilan.html) — img yerine button, tıklanabilir
+   ============================================================ */
+.gallery-tile {
+  all: unset;
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  position: relative;
+}
+.gallery-more-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--overlay-strong);
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+/* Masaüstünde 5. kare zaten "+N" rozetini taşıyor; mobilde CSS o kareyi gizlediği için
+   (bkz. .detail-gallery nth-child(n+5)) aynı rozet mobilde görünen son kareye (4.) taşınır. */
+.gallery-more-overlay-mobile { display: none; }
+@media (max-width: 760px) {
+  .gallery-more-overlay-mobile { display: flex; }
+}
+
+/* ============================================================
+   LIGHTBOX — tam ekran fotoğraf gösterimi
+   ============================================================ */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: var(--overlay-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+.lightbox-figure {
+  margin: 0;
+  max-width: min(92vw, 1100px);
+  max-height: 86vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+.lightbox-img {
+  max-width: 100%;
+  max-height: 76vh;
+  width: auto;
+  height: auto;
+  border-radius: var(--radius);
+  object-fit: contain;
+}
+.lightbox-counter {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+.lightbox-close,
+.lightbox-nav {
+  position: absolute;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 50%;
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color var(--transition), color var(--transition);
+}
+.lightbox-close:hover, .lightbox-nav:hover { border-color: var(--gold); color: var(--gold); }
+.lightbox-close svg, .lightbox-nav svg { width: 22px; height: 22px; }
+.lightbox-close { top: var(--space-3); right: var(--space-3); }
+.lightbox-prev { left: var(--space-3); top: 50%; transform: translateY(-50%); }
+.lightbox-next { right: var(--space-3); top: 50%; transform: translateY(-50%); }
+@media (max-width: 600px) {
+  .lightbox-close, .lightbox-nav { width: 40px; height: 40px; }
+  .lightbox-close svg, .lightbox-nav svg { width: 18px; height: 18px; }
+}
+
+/* ============================================================
+   SANAL GEZİNTİ (tour.js)
+   ============================================================ */
+.tour-section { margin-bottom: var(--space-4); }
+.tour-panel { margin-top: var(--space-2); }
+.tour-iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+.tour-viewer {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface-2);
+}
+.tour-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: var(--space-1); }
+.tour-tab {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  min-height: 40px;
+}
+.tour-tab.active, .tour-tab:hover { border-color: var(--gold); color: var(--gold); }
+.tour-error { color: var(--text-muted); text-align: center; padding: var(--space-4) 0; }
+
+/* ============================================================
+   YAPI BİLGİLERİ TABLOSU (property-detail.js)
+   ============================================================ */
+.detail-features {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+.detail-features h3 { font-size: 1.05rem; margin-bottom: var(--space-2); }
+.detail-features-list {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--space-2);
+}
+.detail-features-list > div { display: flex; flex-direction: column; gap: 2px; }
+.detail-features-list dt { font-size: 0.78rem; color: var(--text-muted); }
+.detail-features-list dd { margin: 0; font-weight: 600; color: var(--text); }
+
+/* ============================================================
+   SCRİPTLİ ASİSTAN (chat.js)
+   ============================================================ */
+.chat-toggle {
+  position: fixed;
+  right: var(--space-3);
+  bottom: var(--space-3);
+  z-index: 95;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--gold-ink);
+  border: none;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow);
+  transition: transform var(--transition), background var(--transition);
+}
+.chat-toggle:hover { transform: translateY(-2px); background: #dbb62c; }
+.chat-toggle svg { width: 26px; height: 26px; }
+@media (max-width: 767px) {
+  .chat-toggle { bottom: calc(var(--mobile-bar-height) + var(--space-2)); }
+}
+
+.chat-panel {
+  position: fixed;
+  right: var(--space-3);
+  bottom: calc(var(--space-3) + 68px);
+  z-index: 95;
+  width: min(360px, calc(100vw - var(--space-3) * 2));
+  max-height: min(560px, calc(100vh - var(--nav-height) - 120px));
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+@media (max-width: 767px) {
+  .chat-panel { bottom: calc(var(--mobile-bar-height) + var(--space-2) + 68px); }
+}
+.chat-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+.chat-header-title { font-family: var(--font-heading); font-weight: 600; color: var(--text); }
+.chat-close {
+  background: none; border: none; color: var(--text-muted);
+  width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+}
+.chat-close svg { width: 18px; height: 18px; }
+.chat-close:hover { color: var(--gold); }
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-2) var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.chat-msg { display: flex; flex-direction: column; gap: 6px; max-width: 88%; }
+.chat-msg-user { align-self: flex-end; align-items: flex-end; }
+.chat-msg-bot { align-self: flex-start; align-items: flex-start; }
+.chat-bubble {
+  padding: 10px 14px;
+  border-radius: var(--radius-lg);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+.chat-msg-user .chat-bubble { background: var(--gold); color: var(--gold-ink); }
+.chat-msg-bot .chat-bubble { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); }
+.chat-wa-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--wa);
+  font-weight: 600;
+}
+.chat-wa-link svg { width: 14px; height: 14px; }
+.chat-quick {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 0 var(--space-3) var(--space-2);
+}
+.chat-chip {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  padding: 6px 12px;
+  border-radius: 999px;
+  min-height: 32px;
+}
+.chat-chip:hover { border-color: var(--gold); color: var(--gold); }
+.chat-form {
+  display: flex;
+  gap: 8px;
+  padding: var(--space-2) var(--space-3);
+  border-top: 1px solid var(--border);
+}
+.chat-input {
+  flex: 1;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  min-height: 44px;
+}
+.chat-send {
+  background: var(--gold);
+  color: var(--gold-ink);
+  border: none;
+  width: 44px; height: 44px;
+  border-radius: var(--radius);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.chat-send svg { width: 18px; height: 18px; }
+.chat-send:hover { background: #dbb62c; }

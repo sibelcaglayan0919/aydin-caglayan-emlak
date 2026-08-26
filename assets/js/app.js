@@ -79,8 +79,27 @@
     trending: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>',
     menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>',
     instagram: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>',
-    linkedin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>'
+    linkedin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>',
+    close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
+    chevronLeft: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>',
+    chevronRight: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>',
+    rotate360: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3.5-7.11"/><polyline points="21 3 21 9 15 9"/></svg>',
+    chat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>',
+    send: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>'
   };
+
+  /* ---------- Yapı bilgileri (opsiyonel p.details) — detay tablosu ve asistan ortak kullanır ---------- */
+  function detailsRows(p) {
+    if (!p || !p.details) return [];
+    const d = p.details;
+    const rows = [];
+    if (d.floor !== undefined && d.floor !== null && d.floor !== "") rows.push({ label: t("detail_floor"), value: String(d.floor) });
+    if (d.totalFloors) rows.push({ label: t("detail_total_floors"), value: String(d.totalFloors) });
+    if (d.buildingAge !== undefined && d.buildingAge !== null && d.buildingAge !== "") rows.push({ label: t("detail_building_age"), value: d.buildingAge + " " + t("detail_years") });
+    if (d.facing) rows.push({ label: t("detail_facing"), value: t("facing_" + d.facing) });
+    if (d.heating) rows.push({ label: t("detail_heating"), value: t("heating_" + d.heating) });
+    return rows;
+  }
 
   /* ---------- İlan kartı render ---------- */
   function propertyStatusLabel(status) {
@@ -94,6 +113,7 @@
       '<article class="property-card reveal">' +
         '<a href="ilan.html?id=' + encodeURIComponent(p.id) + '" class="property-media" aria-label="' + propertyStatusLabel(p.status) + ': ' + pick(p.title) + '">' +
           '<span class="property-badge">' + propertyStatusLabel(p.status) + '</span>' +
+          (p.tour ? '<span class="property-badge property-badge-tour">' + ICONS.rotate360 + t("tour_badge") + '</span>' : "") +
           '<img src="' + img + '" alt="' + pick(p.title) + '" loading="lazy" width="480" height="360">' +
         '</a>' +
         '<div class="property-body">' +
@@ -331,6 +351,7 @@
     renderHeroAndBrand();
     if (document.getElementById("property-grid")) initHome();
     if (typeof window.onLangChangeDetail === "function") window.onLangChangeDetail();
+    if (typeof window.onLangChangeChat === "function") window.onLangChangeChat();
   };
 
   document.addEventListener("DOMContentLoaded", function () {
@@ -347,5 +368,5 @@
   });
 
   // Diğer scriptlerin kullanabilmesi için dışa aç
-  window.SiteApp = { t: t, pick: pick, plural: plural, fmtPrice: fmtPrice, waLink: waLink, telLink: telLink, ICONS: ICONS, observeReveals: observeReveals, getLang: function () { return currentLang; } };
+  window.SiteApp = { t: t, pick: pick, plural: plural, fmtPrice: fmtPrice, waLink: waLink, telLink: telLink, ICONS: ICONS, observeReveals: observeReveals, detailsRows: detailsRows, getLang: function () { return currentLang; } };
 })();
