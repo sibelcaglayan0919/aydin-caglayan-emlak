@@ -49,15 +49,15 @@ const PROPERTIES = [
     area: 65,
     featured: true,
     images: [
-      "https://raw.githubusercontent.com/sibelcaglayan0919/aydin-caglayan-emlak/master/assets/img/properties/manzarali-daire-1/1.jpg",
-      "https://raw.githubusercontent.com/sibelcaglayan0919/aydin-caglayan-emlak/master/assets/img/properties/manzarali-daire-1/2.jpg",
-      "https://raw.githubusercontent.com/sibelcaglayan0919/aydin-caglayan-emlak/master/assets/img/properties/manzarali-daire-1/3.jpg",
-      "https://raw.githubusercontent.com/sibelcaglayan0919/aydin-caglayan-emlak/master/assets/img/properties/manzarali-daire-1/4.jpg",
-      "https://raw.githubusercontent.com/sibelcaglayan0919/aydin-caglayan-emlak/master/assets/img/properties/manzarali-daire-1/5.jpg",
-      "https://raw.githubusercontent.com/sibelcaglayan0919/aydin-caglayan-emlak/master/assets/img/properties/manzarali-daire-1/6.jpg",
-      "https://raw.githubusercontent.com/sibelcaglayan0919/aydin-caglayan-emlak/master/assets/img/properties/manzarali-daire-1/7.jpg",
-      "https://raw.githubusercontent.com/sibelcaglayan0919/aydin-caglayan-emlak/master/assets/img/properties/manzarali-daire-1/8.jpg",
-      "https://raw.githubusercontent.com/sibelcaglayan0919/aydin-caglayan-emlak/master/assets/img/properties/manzarali-daire-1/9.jpg"
+      "assets/img/properties/manzarali-daire-1/1.jpg",
+      "assets/img/properties/manzarali-daire-1/2.jpg",
+      "assets/img/properties/manzarali-daire-1/3.jpg",
+      "assets/img/properties/manzarali-daire-1/4.jpg",
+      "assets/img/properties/manzarali-daire-1/5.jpg",
+      "assets/img/properties/manzarali-daire-1/6.jpg",
+      "assets/img/properties/manzarali-daire-1/7.jpg",
+      "assets/img/properties/manzarali-daire-1/8.jpg",
+      "assets/img/properties/manzarali-daire-1/9.jpg"
     ]
   }
 
@@ -71,7 +71,7 @@ const PROPERTIES = [
   //   location: { tr: "...", en: "..." },
   //   beds: 4, baths: 3, area: 320,
   //   featured: false,
-  //   images: ["https://raw.githubusercontent.com/sibelcaglayan0919/aydin-caglayan-emlak/master/assets/img/properties/villa-ornek/1.jpg"],
+  //   images: ["assets/img/properties/villa-ornek/1.jpg"],
   //   details: { floor: 0, totalFloors: 2, buildingAge: 3, facing: "guney", heating: "yerden" },
   //   tour: { type: "embed", url: "https://my.matterport.com/show/?m=XXXX" }
   // }

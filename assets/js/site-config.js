@@ -33,7 +33,7 @@ const SITE = {
       en: "Personal guidance through the region's finest properties. A trusted partner for buying, selling, and renting."
     },
     // Hero arkaplan görseli
-    image: "https://raw.githubusercontent.com/sibelcaglayan0919/aydin-caglayan-emlak/master/assets/img/hero/hero.jpg"
+    image: "assets/img/hero/hero.jpg"
   },
 
   // Güven bandı — TODO: diğer rakamları gerçek verilerle güncelle
@@ -46,7 +46,7 @@ const SITE = {
 
   // Hakkımda
   about: {
-    photo: "https://raw.githubusercontent.com/sibelcaglayan0919/aydin-caglayan-emlak/master/assets/img/agent/portrait.jpg",
+    photo: "assets/img/agent/portrait.jpg",
     story: {
       tr: "Merhaba, ben Aydın Çağlayan. Yılların verdiği tecrübeyle bölgenin en özel mülklerini doğru alıcı ve satıcılarla buluşturuyorum. Her müşterime kişisel bir danışmanlık süreci sunuyor, kararlarınızı güvenle almanız için yanınızda oluyorum.",
       en: "Hello, I'm Aydın Çağlayan. With years of experience, I connect the region's finest properties with the right buyers and sellers. I offer every client a personal consulting process so you can make decisions with confidence."
