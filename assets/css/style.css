@@ -199,11 +199,37 @@ section { padding: var(--space-7) 0; }
 .nav-toggle svg { width: 26px; height: 26px; stroke: var(--text); }
 
 @media (max-width: 900px) {
-  .main-nav ul { display: none; }
+  .nav-toggle { display: flex; }
+  .main-nav ul {
+    display: none;
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: var(--overlay-strong);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 var(--space-3);
+    max-height: calc(100vh - var(--nav-height));
+    overflow-y: auto;
+  }
+  .main-nav ul.nav-open { display: flex; }
+  .main-nav ul li { border-top: 1px solid var(--border); }
+  .main-nav ul li:first-child { border-top: none; }
+  .main-nav a { width: 100%; }
   .tel-link span { display: none; }
 }
 @media (max-width: 600px) {
   .brand { font-size: 1.05rem; }
+}
+@media (max-width: 380px) {
+  .site-header .container { padding: 0 var(--space-2); }
+  .header-actions { gap: 8px; }
+  .lang-switch button { min-width: 36px; padding: 8px; }
+  .nav-toggle { min-width: 40px; }
 }
 
 /* ============================================================
@@ -381,7 +407,7 @@ section { padding: var(--space-7) 0; }
    ============================================================ */
 .property-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
   gap: var(--space-3);
 }
 .property-card {
@@ -420,7 +446,7 @@ section { padding: var(--space-7) 0; }
 .property-meta span { display: flex; align-items: center; gap: 5px; }
 .property-meta svg { width: 16px; height: 16px; stroke: var(--gold); }
 .property-actions { display: flex; gap: var(--space-1); }
-.property-actions .btn { flex: 1; }
+.property-actions .btn { flex: 1; min-width: 0; white-space: normal; text-align: center; }
 .empty-state { text-align: center; padding: var(--space-6) 0; color: var(--text-muted); }
 .load-more { text-align: center; margin-top: var(--space-4); }
 
@@ -512,6 +538,9 @@ section { padding: var(--space-7) 0; }
   text-align: center;
 }
 .contact-panel h2 { margin-bottom: var(--space-2); }
+@media (max-width: 767px) {
+  .contact-panel { padding: var(--space-4) var(--space-3); }
+}
 .contact-actions { display: flex; gap: var(--space-2); justify-content: center; flex-wrap: wrap; margin-top: var(--space-3); }
 .contact-info { display: flex; gap: var(--space-4); justify-content: center; margin-top: var(--space-4); flex-wrap: wrap; color: var(--text-muted); font-size: 0.9rem; }
 .contact-info span { display: flex; align-items: center; gap: 6px; }
@@ -557,6 +586,16 @@ section { padding: var(--space-7) 0; }
 .footer-social a:hover { border-color: var(--gold); }
 .footer-social svg { width: 18px; height: 18px; stroke: var(--text-muted); }
 .footer-copy { font-size: 0.82rem; color: var(--text-muted); }
+.footer-admin-link {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  white-space: nowrap;
+  transition: color var(--transition);
+}
+.footer-admin-link:hover, .footer-admin-link:focus-visible { color: var(--gold); }
 
 /* ============================================================
    MOBİL SABİT CTA BAR
@@ -614,6 +653,7 @@ section { padding: var(--space-7) 0; }
 .detail-gallery > *:first-child { grid-row: span 2; grid-column: span 1; }
 @media (max-width: 760px) {
   .detail-gallery { grid-template-columns: 1fr 1fr; grid-template-rows: 160px 160px; }
+  .detail-gallery > *:first-child { grid-row: auto; grid-column: auto; }
   .detail-gallery > *:nth-child(n+5) { display: none; }
 }
 .detail-head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-3); flex-wrap: wrap; margin-bottom: var(--space-4); }

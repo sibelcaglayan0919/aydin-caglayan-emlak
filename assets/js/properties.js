@@ -39,11 +39,11 @@ const PROPERTIES = [
       tr: "Didim'de, havuzlu ve güvenlikli bir site içerisinde yer alan 65 m² net kullanım alanına sahip 2+1 daire. Geniş balkonundan denizi gören daire; ferah salon, modern mutfak ve kaliteli banyo dolaplarıyla hem oturuma hem yatırıma uygun. Site içi yüzme havuzu, yeşil alanları ve merkezi konumuyla hem yazlık hem yıllık kullanım için ideal.",
       en: "A 2+1 apartment with 65 sqm of net living space, located in a secure complex with a swimming pool in Didim. Enjoying sea views from its spacious balcony, the apartment offers a bright living room, modern kitchen, and quality bathroom fittings — ideal for both living and investment. The complex's shared pool, green areas, and central location make it perfect for year-round or holiday use."
     },
-    price: 9500000,
+    price: 5900000,
     currency: "TRY",
     status: "sale",              // sale | rent | sold
     type: "daire",                // villa | daire | arsa | isyeri
-    location: { tr: "Didim, Aydın", en: "Didim, Aydın" },
+    location: { tr: "Didim, Akbük", en: "Didim, Akbük" },
     beds: 2,
     baths: 1,
     area: 65,
@@ -58,6 +58,47 @@ const PROPERTIES = [
       "assets/img/properties/manzarali-daire-1/7.jpg",
       "assets/img/properties/manzarali-daire-1/8.jpg",
       "assets/img/properties/manzarali-daire-1/9.jpg"
+    ]
+  },
+  {
+    id: "villa-akbuk",
+    title: { tr: "Deniz Manzaralı 3+1 Villa, Akbük", en: "Sea-View 3+1 Villa, Akbük" },
+    desc: {
+      tr: "Didim'in gözde bölgesi Akbük'te, sıfır ve modern mimarili 3+1 müstakil villa. İki katlı yerleşimiyle geniş bir aile için ideal olan villa; ferah yatak odaları, 2 banyo ve zeytin ağaçlarıyla çevrili özel bahçesiyle dikkat çekiyor. Üst kat balkonundan denizi gören villa, hem yıllık yaşam hem yatırım için değerlendirilebilir.",
+      en: "A brand-new, modern 3+1 detached villa in Akbük, one of Didim's most sought-after areas. Spread over two floors and ideal for a large family, the villa features bright bedrooms, 2 bathrooms, and a private garden surrounded by olive trees. With sea views from its upper-floor balcony, it suits both year-round living and investment."
+    },
+    price: 9500000,
+    currency: "TRY",
+    status: "sale",              // sale | rent | sold
+    type: "villa",                // villa | daire | arsa | isyeri
+    location: { tr: "Didim, Akbük", en: "Didim, Akbük" },
+    beds: 3,
+    baths: 2,
+    area: 130,                    // TAHMİNİ (görsellerden tahmin edildi) — gerçek tapu/proje m² ile güncelle
+    featured: true,
+    images: [
+      "assets/img/properties/villa-akbuk/1.jpg",
+      "assets/img/properties/villa-akbuk/2.jpg",
+      "assets/img/properties/villa-akbuk/3.jpg",
+      "assets/img/properties/villa-akbuk/4.jpg",
+      "assets/img/properties/villa-akbuk/5.jpg",
+      "assets/img/properties/villa-akbuk/6.jpg",
+      "assets/img/properties/villa-akbuk/7.jpg",
+      "assets/img/properties/villa-akbuk/8.jpg",
+      "assets/img/properties/villa-akbuk/9.jpg",
+      "assets/img/properties/villa-akbuk/10.jpg",
+      "assets/img/properties/villa-akbuk/11.jpg",
+      "assets/img/properties/villa-akbuk/12.jpg",
+      "assets/img/properties/villa-akbuk/13.jpg",
+      "assets/img/properties/villa-akbuk/14.jpg",
+      "assets/img/properties/villa-akbuk/15.jpg",
+      "assets/img/properties/villa-akbuk/16.jpg",
+      "assets/img/properties/villa-akbuk/17.jpg",
+      "assets/img/properties/villa-akbuk/18.jpg",
+      "assets/img/properties/villa-akbuk/19.jpg",
+      "assets/img/properties/villa-akbuk/20.jpg",
+      "assets/img/properties/villa-akbuk/21.jpg",
+      "assets/img/properties/villa-akbuk/22.jpg"
     ]
   }
 

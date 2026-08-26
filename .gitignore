@@ -1,1 +1,14 @@
 resimler/
+
+# Ortam degiskenleri / sirlar
+.env
+.env.*
+!.env.example
+
+# Bagimlilik / derleme
+node_modules/
+.vercel/
+
+# Isletim sistemi
+.DS_Store
+Thumbs.db

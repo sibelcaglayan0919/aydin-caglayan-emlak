@@ -9,9 +9,9 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;600;700&display=swap"></noscript>
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -20,8 +20,8 @@
 <header class="site-header">
   <div class="container">
     <a href="index.html" class="brand"><span data-site-name>AD SOYAD</span></a>
-    <nav class="main-nav" aria-label="Ana menü">
-      <ul>
+    <nav class="main-nav" aria-label="Ana menü" data-i18n-aria="aria_main_nav">
+      <ul id="main-nav-list">
         <li><a href="index.html#hero" data-i18n="nav_home">Anasayfa</a></li>
         <li><a href="index.html#ilanlar" data-i18n="nav_properties">İlanlar</a></li>
         <li><a href="index.html#hakkimda" data-i18n="nav_about">Hakkımda</a></li>
@@ -33,11 +33,11 @@
         <span data-icon="phone"></span>
         <span data-tel-text>Telefon</span>
       </a>
-      <div class="lang-switch" role="group" aria-label="Dil seçimi">
+      <div class="lang-switch" role="group" aria-label="Dil seçimi" data-i18n-aria="aria_lang_switch">
         <button type="button" data-lang="tr" aria-pressed="true">TR</button>
         <button type="button" data-lang="en" aria-pressed="false">EN</button>
       </div>
-      <button class="nav-toggle" aria-label="Menüyü aç" aria-expanded="false">
+      <button class="nav-toggle" aria-label="Menüyü aç" aria-expanded="false" aria-controls="main-nav-list" data-i18n-aria="aria_menu_open">
         <span data-icon="menu"></span>
       </button>
     </div>
@@ -73,9 +73,10 @@
   <div class="container footer-row">
     <div class="footer-copy">&copy; <span id="footer-year"></span> <span data-site-name>AD SOYAD</span> — <span data-i18n="footer_rights">Tüm hakları saklıdır.</span></div>
     <div class="footer-social">
-      <a href="#" aria-label="Instagram" data-icon="instagram"></a>
-      <a href="#" aria-label="LinkedIn" data-icon="linkedin"></a>
+      <a href="#" aria-label="Instagram" data-icon="instagram" data-social="instagram" target="_blank" rel="noopener"></a>
+      <a href="#" aria-label="LinkedIn" data-icon="linkedin" data-social="linkedin" target="_blank" rel="noopener"></a>
     </div>
+    <a href="admin/" class="footer-admin-link" rel="nofollow" data-i18n="footer_admin">Danışman Girişi</a>
   </div>
 </footer>
 
