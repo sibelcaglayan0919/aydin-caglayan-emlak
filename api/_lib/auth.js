@@ -62,8 +62,13 @@ function verifySessionToken(token) {
   try {
     const decoded = Buffer.from(token, "base64url").toString("utf8");
     const parts = decoded.split(".");
-    if (parts.length !== 3) return null;
-    const [username, expiresStr, sig] = parts;
+    // Kullanıcı adının içinde "." geçebilir (örn. "aydin.caglayan"); bu yüzden
+    // baştan 3 parça beklemek yerine son iki parçayı (zamanaşımı, imza) al,
+    // geri kalan her şeyi (nokta dahil) kullanıcı adı olarak birleştir.
+    if (parts.length < 3) return null;
+    const sig = parts[parts.length - 1];
+    const expiresStr = parts[parts.length - 2];
+    const username = parts.slice(0, parts.length - 2).join(".");
     const payload = username + "." + expiresStr;
     const expectedSig = sign(payload);
     if (!timingSafeEqualHex(sig, expectedSig)) return null;
