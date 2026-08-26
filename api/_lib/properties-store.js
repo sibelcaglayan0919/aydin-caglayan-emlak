@@ -38,13 +38,24 @@ function parsePropertiesFile(fileText) {
   vm.createContext(sandbox);
   // Yukarıdaki güvenlik notuna bakın: burada çalıştırılan metin
   // yalnızca GitHub'daki kendi properties.js dosyamızdır.
-  vm.runInContext(fileText, sandbox, { timeout: 2000 });
+  //
+  // Not: dosya "const PROPERTIES = [...]" kullanıyor. Node'un vm
+  // modülünde üst düzey const/let bildirimleri, sandbox nesnesinin
+  // kendi özelliği (own property) olarak GÖRÜNMEZ — sadece var ve
+  // fonksiyon bildirimleri öyle davranır. Bu yüzden kodu bir IIFE
+  // içinde çalıştırıp PROPERTIES'i doğrudan tamamlanma değeri (return)
+  // olarak alıyoruz; sandbox.PROPERTIES'e güvenmiyoruz.
+  const items = vm.runInContext(
+    "(function () {\n" + fileText + "\nreturn typeof PROPERTIES !== 'undefined' ? PROPERTIES : undefined;\n})()",
+    sandbox,
+    { timeout: 2000 }
+  );
 
-  if (!Array.isArray(sandbox.PROPERTIES)) {
+  if (!Array.isArray(items)) {
     throw new Error("properties.js parse edildi ama PROPERTIES bir dizi değil.");
   }
 
-  return { header: header, items: sandbox.PROPERTIES, footer: footer };
+  return { header: header, items: items, footer: footer };
 }
 
 // ---- Serileştirme (obje -> properties.js metni) ----
