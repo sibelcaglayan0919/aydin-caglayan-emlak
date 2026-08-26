@@ -34,15 +34,18 @@
 const PROPERTIES = [
   {
     id: "manzarali-daire-1",
-    title: { tr: "2+1 Deniz Manzaralı Daire, Havuzlu Site", en: "2+1 Sea-View Apartment in a Pool Complex" },
+    title: {
+      tr: "2+1 Deniz Manzaralı Daire, Havuzlu Site",
+      en: "2+1 Sea-View Apartment in a Pool Complex"
+    },
     desc: {
       tr: "Didim'de, havuzlu ve güvenlikli bir site içerisinde yer alan 65 m² net kullanım alanına sahip 2+1 daire. Geniş balkonundan denizi gören daire; ferah salon, modern mutfak ve kaliteli banyo dolaplarıyla hem oturuma hem yatırıma uygun. Site içi yüzme havuzu, yeşil alanları ve merkezi konumuyla hem yazlık hem yıllık kullanım için ideal.",
       en: "A 2+1 apartment with 65 sqm of net living space, located in a secure complex with a swimming pool in Didim. Enjoying sea views from its spacious balcony, the apartment offers a bright living room, modern kitchen, and quality bathroom fittings — ideal for both living and investment. The complex's shared pool, green areas, and central location make it perfect for year-round or holiday use."
     },
     price: 5900000,
     currency: "TRY",
-    status: "sale",              // sale | rent | sold
-    type: "daire",                // villa | daire | arsa | isyeri
+    status: "sale",  // sale | rent | sold
+    type: "daire",  // villa | daire | arsa | isyeri
     location: { tr: "Didim, Akbük", en: "Didim, Akbük" },
     beds: 2,
     baths: 1,
@@ -60,6 +63,7 @@ const PROPERTIES = [
       "assets/img/properties/manzarali-daire-1/9.jpg"
     ]
   },
+
   {
     id: "villa-akbuk",
     title: { tr: "Deniz Manzaralı 3+1 Villa, Akbük", en: "Sea-View 3+1 Villa, Akbük" },
@@ -69,12 +73,12 @@ const PROPERTIES = [
     },
     price: 9500000,
     currency: "TRY",
-    status: "sale",              // sale | rent | sold
-    type: "villa",                // villa | daire | arsa | isyeri
+    status: "sale",  // sale | rent | sold
+    type: "villa",  // villa | daire | arsa | isyeri
     location: { tr: "Didim, Akbük", en: "Didim, Akbük" },
     beds: 3,
     baths: 2,
-    area: 130,                    // TAHMİNİ (görsellerden tahmin edildi) — gerçek tapu/proje m² ile güncelle
+    area: 130,
     featured: true,
     images: [
       "assets/img/properties/villa-akbuk/1.jpg",
@@ -100,6 +104,38 @@ const PROPERTIES = [
       "assets/img/properties/villa-akbuk/21.jpg",
       "assets/img/properties/villa-akbuk/22.jpg"
     ]
+  },
+
+  {
+    id: "of-plan-2-adet-yapilacaktir-adet-fiyatidir",
+    title: {
+      tr: "Didim Efelerde 1000 m2 içinde 2 adet villa projemiz",
+      en: "Our project in Didim Efeler consists of 2 villas on a 1000 m2 area."
+    },
+    desc: {
+      tr: "Ekim 15 başlangıç mayis anahtar teslim uygun ödeme seçeneği ve takas desteği mevcut",
+      en: "Starting October 15th, turnkey delivery in May. Convenient payment options and trade-in support available."
+    },
+    price: 30000000,
+    currency: "TRY",
+    status: "sale",  // sale | rent | sold
+    type: "villa",  // villa | daire | arsa | isyeri
+    location: { tr: "Didim(Yenihisar)", en: "Didim(Yenihisar)" },
+    beds: 4,
+    baths: 2,
+    area: 150,
+    featured: false,
+    images: [
+      "assets/img/properties/of-plan-2-adet-yapilacaktir-adet-fiyatidir/1.jpg",
+      "assets/img/properties/of-plan-2-adet-yapilacaktir-adet-fiyatidir/2.jpg",
+      "assets/img/properties/of-plan-2-adet-yapilacaktir-adet-fiyatidir/3.jpg"
+    ],
+    details: {
+      totalFloors: 2,
+      buildingAge: 0,
+      facing: "guney",
+      heating: "yerden"
+    }
   }
 
   // Yeni ilan örneği:
