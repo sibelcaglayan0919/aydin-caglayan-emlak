@@ -176,6 +176,42 @@ const PROPERTIES = [
       facing: "guney",
       heating: "merkezi"
     }
+  },
+
+  {
+    id: "satilik",
+    title: { tr: "Satilik", en: "Sale" },
+    desc: {
+      tr: "Didim efeler 4+1 salon mutfak",
+      en: "From didim efeler 4 bedroom 3 bathroom"
+    },
+    price: 28000000,
+    currency: "TRY",
+    status: "sale",  // sale | rent | sold
+    type: "villa",  // villa | daire | arsa | isyeri
+    location: { tr: "didim efeler", en: "Didim" },
+    beds: 4,
+    baths: 3,
+    area: 180,
+    featured: false,
+    images: [
+      "assets/img/properties/satilik/1.jpg",
+      "assets/img/properties/satilik/2.jpg",
+      "assets/img/properties/satilik/3.jpg",
+      "assets/img/properties/satilik/4.jpg",
+      "assets/img/properties/satilik/5.jpg",
+      "assets/img/properties/satilik/6.jpg",
+      "assets/img/properties/satilik/7.jpg",
+      "assets/img/properties/satilik/8.jpg",
+      "assets/img/properties/satilik/9.jpg"
+    ],
+    details: {
+      floor: 2,
+      totalFloors: 2,
+      buildingAge: 0,
+      facing: "guney",
+      heating: "merkezi"
+    }
   }
 
   // Yeni ilan örneği:
