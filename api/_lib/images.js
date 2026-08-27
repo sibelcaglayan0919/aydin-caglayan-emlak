@@ -4,7 +4,7 @@
    sıkıştırılmış olmalı (bkz. admin/admin.js resizeImage()).
    ============================================================ */
 
-const { putFile } = require("./github");
+const { putFile, getFile } = require("./github");
 
 const MAX_DATAURL_LEN = 2 * 1024 * 1024; // ~2MB base64 metin uzunluğu (güvenlik sınırı)
 const ID_RE = /^[a-z0-9-]{3,60}$/;
@@ -22,7 +22,11 @@ async function uploadOnePhoto(id, index, dataUrl) {
   const base64 = dataUrl.slice(commaIdx + 1);
   const buffer = Buffer.from(base64, "base64");
   const path = "assets/img/properties/" + id + "/" + n + ".jpg";
-  await putFile(path, buffer, null, "İlan fotoğrafı eklendi: " + id + "/" + n + ".jpg");
+  // Aynı path'te (aynı index) zaten bir fotoğraf olabilir (düzenleme sırasında
+  // üstüne yazma durumu) — GitHub'ın var olan dosyanın üstüne yazması için
+  // mevcut sha'sını göndermemiz gerekiyor, yoksa 422 "sha wasn't supplied" hatası döner.
+  const existing = await getFile(path);
+  await putFile(path, buffer, existing ? existing.sha : null, "İlan fotoğrafı eklendi: " + id + "/" + n + ".jpg");
   return path;
 }
 
