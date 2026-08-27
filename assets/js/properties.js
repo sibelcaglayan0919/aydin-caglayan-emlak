@@ -163,7 +163,15 @@ const PROPERTIES = [
       "assets/img/properties/satilik/6.jpg",
       "assets/img/properties/satilik/7.jpg",
       "assets/img/properties/satilik/8.jpg",
-      "assets/img/properties/satilik/9.jpg"
+      "assets/img/properties/satilik/9.jpg",
+      "assets/img/properties/satilik/10.jpg",
+      "assets/img/properties/satilik/11.jpg",
+      "assets/img/properties/satilik/12.jpg",
+      "assets/img/properties/satilik/13.jpg",
+      "assets/img/properties/satilik/14.jpg",
+      "assets/img/properties/satilik/15.jpg",
+      "assets/img/properties/satilik/16.jpg",
+      "assets/img/properties/satilik/17.jpg"
     ],
     details: {
       floor: 2,
