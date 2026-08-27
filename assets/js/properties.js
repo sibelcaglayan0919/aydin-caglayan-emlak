@@ -145,7 +145,7 @@ const PROPERTIES = [
       tr: "300m2 Arsa mustakil villa",
       en: "300metres villa"
     },
-    price: 28,
+    price: 2800000,
     currency: "TRY",
     status: "sale",  // sale | rent | sold
     type: "villa",  // villa | daire | arsa | isyeri
@@ -172,6 +172,7 @@ const PROPERTIES = [
     details: {
       floor: 2,
       totalFloors: 2,
+      buildingAge: 0,
       facing: "guney",
       heating: "merkezi"
     }
