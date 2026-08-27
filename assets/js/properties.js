@@ -136,6 +136,46 @@ const PROPERTIES = [
       facing: "guney",
       heating: "yerden"
     }
+  },
+
+  {
+    id: "didim-efeler-41-villa",
+    title: { tr: "Satilik", en: "Sale" },
+    desc: {
+      tr: "300m2 Arsa mustakil villa",
+      en: "300metres villa"
+    },
+    price: 28,
+    currency: "TRY",
+    status: "sale",  // sale | rent | sold
+    type: "villa",  // villa | daire | arsa | isyeri
+    location: { tr: "didim efeler", en: "Didim" },
+    beds: 4,
+    baths: 3,
+    area: 180,
+    featured: false,
+    images: [
+      "assets/img/properties/didim-efeler-41-villa/1.jpg",
+      "assets/img/properties/didim-efeler-41-villa/2.jpg",
+      "assets/img/properties/didim-efeler-41-villa/3.jpg",
+      "assets/img/properties/didim-efeler-41-villa/4.jpg",
+      "assets/img/properties/didim-efeler-41-villa/5.jpg",
+      "assets/img/properties/didim-efeler-41-villa/6.jpg",
+      "assets/img/properties/didim-efeler-41-villa/7.jpg",
+      "assets/img/properties/didim-efeler-41-villa/8.jpg",
+      "assets/img/properties/didim-efeler-41-villa/9.jpg",
+      "assets/img/properties/didim-efeler-41-villa/10.jpg",
+      "assets/img/properties/didim-efeler-41-villa/11.jpg",
+      "assets/img/properties/didim-efeler-41-villa/12.jpg",
+      "assets/img/properties/didim-efeler-41-villa/13.jpg"
+    ],
+    details: {
+      floor: 2,
+      totalFloors: 2,
+      buildingAge: 0,
+      facing: "guney",
+      heating: "merkezi"
+    }
   }
 
   // Yeni ilan örneği:
