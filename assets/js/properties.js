@@ -172,7 +172,6 @@ const PROPERTIES = [
     details: {
       floor: 2,
       totalFloors: 2,
-      buildingAge: 0,
       facing: "guney",
       heating: "merkezi"
     }
