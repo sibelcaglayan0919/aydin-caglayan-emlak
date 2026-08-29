@@ -100,6 +100,7 @@
   function showPanel() {
     q("admin-login").hidden = true;
     q("admin-panel").hidden = false;
+    loadAppointments();
     loadListings();
   }
 
@@ -172,6 +173,85 @@
       await loadListings();
     } catch (err) {
       setStatus(q("list-status"), err.message, true);
+    }
+  }
+
+  // ---- Randevular ----
+  const SLOT_LABELS = { morning: "Sabah (09–12)", noon: "Öğle (12–16)", evening: "Akşam (16–19)" };
+  const STATUS_LABELS = { pending: "Beklemede", confirmed: "Onaylandı", cancelled: "İptal" };
+  // Her durumdan hangi işlemlerin yapılabileceği
+  const STATUS_ACTIONS = {
+    pending: [{ to: "confirmed", label: "Onayla" }, { to: "cancelled", label: "İptal", danger: true }],
+    confirmed: [{ to: "cancelled", label: "İptal", danger: true }],
+    cancelled: [{ to: "pending", label: "Beklemeye al" }],
+  };
+
+  function fmtApptDate(iso) {
+    if (!iso) return "";
+    try {
+      return new Date(iso + "T00:00:00").toLocaleDateString("tr-TR", { day: "2-digit", month: "short", year: "numeric" });
+    } catch (e) {
+      return iso;
+    }
+  }
+
+  async function loadAppointments() {
+    setStatus(q("appts-status"), "Yükleniyor…", false);
+    try {
+      const data = await api("/api/appointments");
+      renderAppointments(data.items || []);
+      setStatus(q("appts-status"), "", false);
+    } catch (err) {
+      setStatus(q("appts-status"), err.message, true);
+    }
+  }
+
+  function renderAppointments(items) {
+    const tbody = q("appts-tbody");
+    tbody.innerHTML = "";
+    if (items.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7">Henüz randevu talebi yok.</td></tr>';
+      return;
+    }
+
+    items.forEach(function (a) {
+      const actions = STATUS_ACTIONS[a.status] || [];
+      const tr = document.createElement("tr");
+      tr.innerHTML =
+        "<td>" + escapeHtml(fmtApptDate(a.preferred_date)) + "</td>" +
+        "<td>" + escapeHtml(SLOT_LABELS[a.time_slot] || a.time_slot || "") + "</td>" +
+        '<td' + (a.note ? ' title="' + escapeHtml(a.note) + '"' : "") + ">" + escapeHtml(a.name) +
+          (a.email ? '<br><small>' + escapeHtml(a.email) + "</small>" : "") +
+          (a.note ? ' <span aria-label="Not var">📝</span>' : "") +
+        "</td>" +
+        '<td><a href="tel:' + escapeHtml(a.phone) + '">' + escapeHtml(a.phone) + "</a></td>" +
+        "<td>" + escapeHtml(a.property_title || "—") + "</td>" +
+        '<td><span class="admin-badge admin-badge--' + escapeHtml(a.status) + '">' +
+          escapeHtml(STATUS_LABELS[a.status] || a.status) + "</span></td>" +
+        '<td class="admin-row-actions">' +
+          actions.map(function (act) {
+            return '<button type="button" class="admin-btn admin-btn--sm' + (act.danger ? " admin-btn--danger" : "") +
+              '" data-appt-id="' + escapeHtml(a.id) + '" data-appt-status="' + act.to + '">' + act.label + "</button>";
+          }).join("") +
+        "</td>";
+      tbody.appendChild(tr);
+    });
+
+    tbody.querySelectorAll("[data-appt-id]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        setApptStatus(btn.getAttribute("data-appt-id"), btn.getAttribute("data-appt-status"));
+      });
+    });
+  }
+
+  async function setApptStatus(id, status) {
+    setStatus(q("appts-status"), "Güncelleniyor…", false);
+    try {
+      await api("/api/update-appointment", "POST", { id: id, status: status });
+      await loadAppointments();
+      setStatus(q("appts-status"), "Güncellendi.", false);
+    } catch (err) {
+      setStatus(q("appts-status"), err.message, true);
     }
   }
 
@@ -330,6 +410,7 @@
     q("logout-btn").addEventListener("click", handleLogout);
     q("listing-form").addEventListener("submit", handleFormSubmit);
     q("form-cancel").addEventListener("click", resetForm);
+    q("appts-refresh").addEventListener("click", loadAppointments);
     initFacingHeatingOptions();
     initPhotoPreview();
 

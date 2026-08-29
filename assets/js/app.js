@@ -384,6 +384,7 @@
     if (document.getElementById("property-grid")) initHome();
     if (typeof window.onLangChangeDetail === "function") window.onLangChangeDetail();
     if (typeof window.onLangChangeChat === "function") window.onLangChangeChat();
+    if (typeof window.onLangChangeAppointment === "function") window.onLangChangeAppointment();
   };
 
   document.addEventListener("DOMContentLoaded", function () {

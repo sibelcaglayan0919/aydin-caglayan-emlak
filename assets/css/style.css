@@ -5,19 +5,21 @@
    ============================================================ */
 
 :root {
-  /* Renk */
-  --bg: #0F1419;
-  --surface: #1A2129;
-  --surface-2: #212a33;
-  --text: #F5F3EF;
-  --text-muted: #A8B2BF;
-  --gold: #C9A227;
-  --gold-ink: #0F1419;
+  /* Renk — sade "bej & beyaz": açık, sıcak, minimal; koyu antik altın vurgu */
+  --bg: #FAF6EF;
+  --surface: #FFFFFF;
+  --surface-2: #F1EADD;
+  --text: #2B2721;
+  --text-muted: #6E675B;
+  --gold: #8A6720;
+  --gold-ink: #FFFFFF;
   --wa: #25D366;
-  --wa-ink: #0F1419;
-  --border: #2A3440;
-  --overlay: rgba(15, 20, 25, 0.72);
-  --overlay-strong: rgba(15, 20, 25, 0.88);
+  --wa-ink: #10241A;
+  --border: #E4DBCB;
+  /* Açık tema: header/menü için açık yarı saydam; modal karartması ayrı (--scrim) */
+  --overlay: rgba(250, 246, 239, 0.72);
+  --overlay-strong: rgba(250, 246, 239, 0.88);
+  --scrim: rgba(38, 33, 25, 0.55);
 
   /* Tipografi */
   --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
@@ -35,7 +37,7 @@
   /* Diğer */
   --radius: 4px;
   --radius-lg: 8px;
-  --shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  --shadow: 0 12px 40px rgba(43, 39, 33, 0.12);
   --transition: 250ms ease;
   --nav-height: 76px;
   --mobile-bar-height: 64px;
@@ -280,18 +282,18 @@ section { padding: var(--space-7) 0; }
 }
 .hero-bg {
   position: absolute;
-  inset: 0;
+  inset: -2%;
   background: var(--surface);
   background-size: cover;
   background-position: center;
-  animation: heroKenBurns 26s ease-in-out infinite alternate;
+  animation: heroKenBurns 24s ease-in-out infinite;
   will-change: transform;
 }
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(15,20,25,0.30) 0%, rgba(15,20,25,0.58) 55%, var(--bg) 100%);
+  background: linear-gradient(180deg, rgba(250,246,239,0) 0%, rgba(250,246,239,0.20) 35%, rgba(250,246,239,0.72) 72%, var(--bg) 100%);
   z-index: 1;
 }
 .hero-content { position: relative; z-index: 2; max-width: 640px; }
@@ -331,8 +333,9 @@ section { padding: var(--space-7) 0; }
 }
 
 @keyframes heroKenBurns {
-  from { transform: scale(1); }
-  to { transform: scale(1.09); }
+  0%   { transform: scale(1.06) translate3d(-1.2%, -0.8%, 0); }
+  50%  { transform: scale(1.14) translate3d(1.2%, 0.8%, 0); }
+  100% { transform: scale(1.06) translate3d(-1.2%, -0.8%, 0); }
 }
 @keyframes heroFadeUp {
   from { opacity: 0; transform: translateY(18px); }
@@ -422,12 +425,13 @@ section { padding: var(--space-7) 0; }
 }
 .property-card:hover { border-color: var(--gold); transform: translateY(-3px); }
 .property-media {
+  display: block;
   position: relative;
   aspect-ratio: 4 / 3;
   background: var(--surface-2);
   overflow: hidden;
 }
-.property-media img { width: 100%; height: 100%; object-fit: cover; }
+.property-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .property-badge {
   position: absolute;
   top: 12px; left: 12px;
@@ -733,7 +737,7 @@ section { padding: var(--space-7) 0; }
   position: fixed;
   inset: 0;
   z-index: 300;
-  background: var(--overlay-strong);
+  background: rgba(30, 26, 20, 0.86);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -960,3 +964,110 @@ section { padding: var(--space-7) 0; }
 }
 .chat-send svg { width: 18px; height: 18px; }
 .chat-send:hover { background: #dbb62c; }
+
+/* ============================================================
+   RANDEVU — talep modalı
+   ============================================================ */
+.appt-section-actions { display: flex; justify-content: center; }
+.appt-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 310;
+  background: var(--scrim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3);
+}
+.appt-dialog {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  width: min(460px, 100%);
+  max-height: min(90vh, 760px);
+  overflow-y: auto;
+  padding: var(--space-3);
+}
+.appt-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+.appt-header h2 { font-size: 1.35rem; margin: 0; }
+.appt-close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  padding: 4px;
+  line-height: 0;
+  flex-shrink: 0;
+}
+.appt-close svg { width: 20px; height: 20px; }
+.appt-close:hover { color: var(--gold); }
+.appt-property {
+  font-size: 0.9rem;
+  color: var(--gold);
+  margin: 0 0 var(--space-2);
+}
+.appt-field { margin-bottom: var(--space-2); border: none; padding: 0; }
+.appt-field > label,
+.appt-field legend {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  padding: 0;
+}
+.appt-field input[type="text"],
+.appt-field input[type="tel"],
+.appt-field input[type="email"],
+.appt-field input[type="date"],
+.appt-field textarea {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 10px 12px;
+  min-height: 44px;
+}
+.appt-field textarea { min-height: 76px; resize: vertical; }
+.appt-field input:focus-visible,
+.appt-field textarea:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+}
+.appt-slots { display: block; }
+.appt-slot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 6px;
+  cursor: pointer;
+  font-size: 0.92rem;
+  min-height: 44px;
+}
+.appt-slot:hover { border-color: var(--gold); }
+.appt-slot input { accent-color: var(--gold); flex-shrink: 0; }
+.appt-slot:has(input:checked) { border-color: var(--gold); background: var(--surface-2); }
+/* Honeypot — ekranda görünmez, ekran okuyucudan da uzak (aria-hidden ile birlikte) */
+.appt-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.appt-status { min-height: 1.3rem; margin-top: var(--space-1); font-size: 0.88rem; color: var(--text-muted); }
+.appt-status--error { color: #E0665C; }
+.appt-success p { color: var(--text); }
+.appt-success-hint { font-size: 0.9rem; color: var(--text-muted); }
+.appt-success .btn { margin-bottom: var(--space-1); }

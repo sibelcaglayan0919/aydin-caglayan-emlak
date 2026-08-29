@@ -70,6 +70,15 @@
     });
   }
 
+  function wireAppointment(p) {
+    const btn = document.getElementById("detail-appt-btn");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      if (!window.AppointmentModal) return;
+      window.AppointmentModal.open({ propertyId: p.id, propertyTitle: window.SiteApp.pick(p.title) });
+    });
+  }
+
   function renderDetail() {
     const app = window.SiteApp;
     const id = getIdFromUrl();
@@ -114,6 +123,7 @@
           '<img src="' + (typeof SITE !== "undefined" ? SITE.about.photo : "") + '" alt="' + (typeof SITE !== "undefined" ? SITE.name : "") + '">' +
           '<h3>' + (typeof SITE !== "undefined" ? SITE.name : "") + '</h3>' +
           '<div class="role">' + app.t("agent_role") + '</div>' +
+          '<button type="button" class="btn btn-gold btn-block" id="detail-appt-btn">' + app.t("appt_cta") + '</button>' +
           '<a class="btn btn-wa btn-block" href="' + waHref + '" target="_blank" rel="noopener">' + app.ICONS.whatsapp + app.t("btn_whatsapp") + '</a>' +
           '<a class="btn btn-outline btn-block" href="' + app.telLink() + '">' + app.ICONS.phone + app.t("btn_call") + '</a>' +
         '</aside>' +
@@ -123,6 +133,7 @@
     if (mobileWa) mobileWa.setAttribute("href", waHref);
 
     wireGallery(p);
+    wireAppointment(p);
     if (window.SiteTour) window.SiteTour.wire(p);
     renderSimilar(p);
     app.observeReveals();

@@ -31,6 +31,7 @@
         <li><a href="#hizmetler" data-i18n="nav_services">Hizmetler</a></li>
         <li><a href="#yorumlar" data-i18n="nav_testimonials">Yorumlar</a></li>
         <li><a href="#konum" data-i18n="map_eyebrow">Konum</a></li>
+        <li><a href="#randevu" data-i18n="appt_nav">Randevu</a></li>
         <li><a href="#iletisim" data-i18n="nav_contact">İletişim</a></li>
       </ul>
     </nav>
@@ -176,6 +177,20 @@
     </div>
   </section>
 
+  <!-- RANDEVU -->
+  <section id="randevu" style="background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-eyebrow" data-i18n="appt_eyebrow">Randevu</div>
+        <h2 data-i18n="appt_title">Yerinde Görmek İster misiniz?</h2>
+        <p data-i18n="appt_sub">Uygun olduğunuz günü ve saat aralığını bırakın, danışmanınız en kısa sürede size dönüş yapsın.</p>
+      </div>
+      <div class="appt-section-actions">
+        <button type="button" class="btn btn-gold" id="appt-open" data-i18n="appt_cta">Randevu Al</button>
+      </div>
+    </div>
+  </section>
+
   <!-- İLETİŞİM -->
   <section id="iletisim">
     <div class="container">
@@ -227,6 +242,7 @@
 <script src="assets/js/i18n.js" defer></script>
 <script src="assets/js/app.js" defer></script>
 <script src="assets/js/chat.js" defer></script>
+<script src="assets/js/appointment.js" defer></script>
 <script defer>document.addEventListener("DOMContentLoaded", function () { document.getElementById("footer-year").textContent = new Date().getFullYear(); });</script>
 </body>
 </html>

@@ -85,6 +85,77 @@ function validateListing(data, existingIds, opts) {
   return { errors: errors, value: out };
 }
 
+/* ---------- Randevu talebi ---------- */
+
+const TIME_SLOTS = ["morning", "noon", "evening"];
+const APPOINTMENT_STATUSES = ["pending", "confirmed", "cancelled"];
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+const PHONE_RE = /^[0-9+\-()\s]{6,30}$/;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+function strField(value, fieldName, errors, opts) {
+  const s = String(value == null ? "" : value).trim();
+  if (!s) {
+    if (opts.required) errors.push(fieldName + ": zorunlu.");
+    return "";
+  }
+  if (opts.min && s.length < opts.min) errors.push(fieldName + ": en az " + opts.min + " karakter olmalı.");
+  if (opts.max && s.length > opts.max) errors.push(fieldName + ": en fazla " + opts.max + " karakter olabilir.");
+  return s;
+}
+
+// Bugünün tarihi "YYYY-MM-DD" olarak (UTC). Tarih karşılaştırması gün
+// hassasiyetinde yapıldığı için metin karşılaştırması yeterlidir.
+function todayIso() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+// data: randevu formundan gelen ham obje. Döner: { errors: [...], value: temizlenmiş satır }
+function validateAppointment(data) {
+  const errors = [];
+  if (!data || typeof data !== "object") return { errors: ["Geçersiz veri."], value: {} };
+
+  const out = {};
+
+  out.name = strField(data.name, "name", errors, { required: true, min: 2, max: 80 });
+
+  const phone = strField(data.phone, "phone", errors, { required: true, max: 30 });
+  if (phone && !PHONE_RE.test(phone)) errors.push("phone: geçerli bir telefon numarası girin.");
+  out.phone = phone;
+
+  const email = strField(data.email, "email", errors, { max: 120 });
+  if (email && !EMAIL_RE.test(email)) errors.push("email: geçerli bir e-posta adresi girin.");
+  out.email = email || null;
+
+  const date = strField(data.preferred_date, "preferred_date", errors, { required: true });
+  if (date) {
+    if (!DATE_RE.test(date) || isNaN(Date.parse(date + "T00:00:00Z"))) {
+      errors.push("preferred_date: geçerli bir tarih (YYYY-AA-GG) olmalı.");
+    } else if (date < todayIso()) {
+      errors.push("preferred_date: geçmiş bir tarih seçilemez.");
+    }
+  }
+  out.preferred_date = date;
+
+  const slot = String(data.time_slot || "").trim();
+  if (TIME_SLOTS.indexOf(slot) === -1) errors.push("time_slot: morning | noon | evening olmalı.");
+  out.time_slot = slot;
+
+  out.note = strField(data.note, "note", errors, { max: 600 }) || null;
+
+  const propertyId = String(data.property_id || "").trim();
+  if (propertyId && !ID_RE.test(propertyId)) errors.push("property_id: geçersiz ilan id'si.");
+  out.property_id = propertyId || null;
+
+  out.property_title = strField(data.property_title, "property_title", errors, { max: 160 }) || null;
+
+  const lang = String(data.lang || "tr").trim();
+  out.lang = lang === "en" ? "en" : "tr";
+
+  return { errors: errors, value: out };
+}
+
 // Bir ilanın "images" alanındaki her yolun kendi klasörüne ait
 // göreceli bir repo yolu olduğunu doğrular (dış URL veya ".." ile
 // klasör dışına çıkma girişimini reddeder).
@@ -95,4 +166,11 @@ function isOwnPropertyImagePath(id, path) {
   return path.startsWith(prefix) && path.length > prefix.length;
 }
 
-module.exports = { validateListing: validateListing, ID_RE: ID_RE, isOwnPropertyImagePath: isOwnPropertyImagePath };
+module.exports = {
+  validateListing: validateListing,
+  validateAppointment: validateAppointment,
+  ID_RE: ID_RE,
+  UUID_RE: UUID_RE,
+  APPOINTMENT_STATUSES: APPOINTMENT_STATUSES,
+  isOwnPropertyImagePath: isOwnPropertyImagePath,
+};

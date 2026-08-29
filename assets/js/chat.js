@@ -123,7 +123,7 @@
     {
       name: "appointment",
       keywords: ["randevu", "gormek istiyorum", "ziyaret", "yerinde gor", "appointment", "viewing", "visit"],
-      respond: function () { return { text: t("chat_a_appointment"), handoff: true }; }
+      respond: function () { return { text: t("chat_a_appointment"), handoff: true, openAppt: true }; }
     },
     {
       name: "contact",
@@ -167,16 +167,25 @@
     addMessage(text, "user");
     const p = currentProperty();
     const intent = matchIntent(text);
-    let reply, handoffMsg;
+    let reply, handoffMsg, openAppt = false;
     if (intent) {
       const result = intent.respond(p);
       reply = result.text;
+      openAppt = !!result.openAppt;
       handoffMsg = p ? t("wa_property_msg").replace("{title}", pick(p.title)) : t("wa_default_msg");
     } else {
       reply = t("chat_a_fallback");
       handoffMsg = p ? t("wa_property_msg").replace("{title}", pick(p.title)) : t("wa_default_msg");
     }
-    window.setTimeout(function () { addMessage(reply, "bot", handoffMsg); }, 260);
+    window.setTimeout(function () {
+      addMessage(reply, "bot", handoffMsg);
+      // Randevu niyetinde formu doğrudan aç — iki dialog üst üste kalmasın diye
+      // sohbet paneli kapatılır. Bubble'daki WhatsApp bağlantısı yedek olarak kalır.
+      if (openAppt && window.AppointmentModal) {
+        close();
+        window.AppointmentModal.open(p ? { propertyId: p.id, propertyTitle: pick(p.title) } : {});
+      }
+    }, 260);
   }
 
   /* ---------- Panel iskeleti ---------- */

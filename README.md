@@ -159,10 +159,63 @@ assets/img/properties/     → İlan fotoğrafları (ilan başına bir klasör)
 
 ---
 
+## 7. Randevu sistemi (Supabase)
+
+Ziyaretçi, sitede **"Randevu Al"** butonuyla açılan formdan tercih ettiği **gün + saat
+aralığı + iletişim bilgisini** bırakır. Talep bir Supabase tablosuna kaydedilir;
+danışman **admin panelindeki "Randevular"** bölümünden **Onayla / İptal** eder.
+Form gönderildikten sonra ziyaretçiye ekranda özet ve "WhatsApp'tan devam et"
+bağlantısı gösterilir (otomatik e-posta/SMS yoktur).
+
+Giriş noktaları: ana sayfadaki **Randevu** bölümü, her **ilan detay** sayfasındaki
+"Randevu Al" butonu (talep o ilana etiketlenir) ve sohbet asistanına "randevu"
+yazılması.
+
+### Kurulum — 2 ortam değişkeni
+
+Vercel projesinde **Settings → Environment Variables** altına ekle (yerel geliştirme
+için de bir `.env` dosyasına):
+
+| Değişken | Değer |
+|---|---|
+| `SUPABASE_URL` | `https://jsajliiwzmbciudlccbe.supabase.co` |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase Dashboard → **Project Settings → API → `service_role` (secret)** anahtarı |
+
+`service_role` anahtarı **gizlidir**, yalnızca sunucudaki `/api` fonksiyonları
+kullanır, tarayıcıya asla gönderilmez, repoya yazılmaz.
+
+### Veri modeli
+
+`appointments` tablosu Supabase'de hazır (migration `create_appointments`).
+Alanlar: `name`, `phone`, `email`, `preferred_date`, `time_slot`
+(`morning|noon|evening`), `note`, `property_id`, `property_title`, `lang`,
+`status` (`pending|confirmed|cancelled`), `created_at`.
+
+Tabloda **RLS açık ama hiçbir policy yok** — yani `anon` anahtarla dışarıdan
+erişim tamamen kapalıdır. Tüm okuma/yazma sadece serverless fonksiyonlardan
+`service_role` anahtarıyla yapılır. (Supabase linter bunun için bir *INFO*
+uyarısı gösterir; bilinçli bir tasarımdır.)
+
+### Uçlar
+
+| Uç | Erişim | İş |
+|---|---|---|
+| `POST /api/book-appointment` | herkese açık | Yeni talep (honeypot + IP başına hız sınırı + doğrulama) |
+| `GET /api/appointments` | danışman oturumu | Talep listesi |
+| `POST /api/update-appointment` | danışman oturumu | `{ id, status }` ile durum güncelle |
+
+### Yerel çalıştırma
+
+Randevu uçları serverless olduğu için `python -m http.server` yetmez;
+`npx vercel dev` ile çalıştır ve yukarıdaki 2 değişkeni (`.env`) + mevcut
+admin/GitHub değişkenlerini sağla.
+
+---
+
 ## Bilinmesi gerekenler
 
 - Site **iki dilli** (TR/EN) — sağ üstteki düğmeyle değişir, seçim tarayıcıda hatırlanır
 - Mobilde ekranın altında sabit **Ara / WhatsApp** butonları vardır
 - Her ilan kartındaki WhatsApp butonu, danışmana **hangi ilan hakkında** yazıldığını otomatik ileten hazır bir mesajla açılır
-- Sağ altta gördüğün sohbet ikonu **scriptli bir asistan** — fiyat/konum/m²/randevu gibi sık sorulan soruları ilan verisinden otomatik yanıtlar ve "WhatsApp'tan devam et" ile danışmana devreder. Gerçek yapay zeka değildir, sunucu/API maliyeti yoktur.
-- Form/CRM/admin panel bu ilk sürümde yok — tüm talepler WhatsApp'a yönleniyor (bireysel danışmanlık için en hızlı yol)
+- Sağ altta gördüğün sohbet ikonu **scriptli bir asistan** — fiyat/konum/m² gibi sık sorulan soruları ilan verisinden otomatik yanıtlar; "randevu" denince randevu formunu açar. Gerçek yapay zeka değildir, sunucu/API maliyeti yoktur.
+- **Randevu talepleri** Supabase'e kaydedilir ve admin panelinden yönetilir (bkz. bölüm 7). Diğer tüm sorular WhatsApp'a yönlenir.
