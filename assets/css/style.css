@@ -44,6 +44,9 @@
 
 /* Reset */
 *, *::before, *::after { box-sizing: border-box; }
+/* `hidden` özniteliği, display:flex/grid tanımlı bileşenlerde (lightbox, sohbet
+   paneli) sınıf seçicisi tarafından eziliyordu; kapatma (X) çalışmıyordu. */
+[hidden] { display: none !important; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
