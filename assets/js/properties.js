@@ -241,6 +241,41 @@ const PROPERTIES = [
       facing: "guney",
       heating: "yerden"
     }
+  },
+
+  {
+    id: "didim-efeler-41-villa",
+    title: { tr: "Satilik", en: "Sale" },
+    desc: {
+      tr: "Didim efeler mahallesi 4+1 havuzlu",
+      en: "From didim efeler 4 Bedroom swiming pool"
+    },
+    price: 26.75,
+    currency: "TRY",
+    status: "sale",  // sale | rent | sold
+    type: "villa",  // villa | daire | arsa | isyeri
+    location: { tr: "Didim Efeler", en: "Didim" },
+    beds: 4,
+    baths: 3,
+    area: 175,
+    featured: false,
+    images: [
+      "assets/img/properties/didim-efeler-41-villa/1.jpg",
+      "assets/img/properties/didim-efeler-41-villa/2.jpg",
+      "assets/img/properties/didim-efeler-41-villa/3.jpg",
+      "assets/img/properties/didim-efeler-41-villa/4.jpg",
+      "assets/img/properties/didim-efeler-41-villa/5.jpg",
+      "assets/img/properties/didim-efeler-41-villa/6.jpg",
+      "assets/img/properties/didim-efeler-41-villa/7.jpg",
+      "assets/img/properties/didim-efeler-41-villa/8.jpg"
+    ],
+    details: {
+      floor: 2,
+      totalFloors: 2,
+      buildingAge: 0,
+      facing: "guney",
+      heating: "yerden"
+    }
   }
 
   // Yeni ilan örneği:
