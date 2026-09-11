@@ -33,38 +33,6 @@
 
 const PROPERTIES = [
   {
-    id: "manzarali-daire-1",
-    title: {
-      tr: "2+1 Deniz Manzaralı Daire, Havuzlu Site",
-      en: "2+1 Sea-View Apartment in a Pool Complex"
-    },
-    desc: {
-      tr: "Didim'de, havuzlu ve güvenlikli bir site içerisinde yer alan 65 m² net kullanım alanına sahip 2+1 daire. Geniş balkonundan denizi gören daire; ferah salon, modern mutfak ve kaliteli banyo dolaplarıyla hem oturuma hem yatırıma uygun. Site içi yüzme havuzu, yeşil alanları ve merkezi konumuyla hem yazlık hem yıllık kullanım için ideal.",
-      en: "A 2+1 apartment with 65 sqm of net living space, located in a secure complex with a swimming pool in Didim. Enjoying sea views from its spacious balcony, the apartment offers a bright living room, modern kitchen, and quality bathroom fittings — ideal for both living and investment. The complex's shared pool, green areas, and central location make it perfect for year-round or holiday use."
-    },
-    price: 5900000,
-    currency: "TRY",
-    status: "sale",  // sale | rent | sold
-    type: "daire",  // villa | daire | arsa | isyeri
-    location: { tr: "Didim, Akbük", en: "Didim, Akbük" },
-    beds: 2,
-    baths: 1,
-    area: 65,
-    featured: true,
-    images: [
-      "assets/img/properties/manzarali-daire-1/1.jpg",
-      "assets/img/properties/manzarali-daire-1/2.jpg",
-      "assets/img/properties/manzarali-daire-1/3.jpg",
-      "assets/img/properties/manzarali-daire-1/4.jpg",
-      "assets/img/properties/manzarali-daire-1/5.jpg",
-      "assets/img/properties/manzarali-daire-1/6.jpg",
-      "assets/img/properties/manzarali-daire-1/7.jpg",
-      "assets/img/properties/manzarali-daire-1/8.jpg",
-      "assets/img/properties/manzarali-daire-1/9.jpg"
-    ]
-  },
-
-  {
     id: "villa-akbuk",
     title: { tr: "Deniz Manzaralı 3+1 Villa, Akbük", en: "Sea-View 3+1 Villa, Akbük" },
     desc: {
