@@ -156,7 +156,7 @@ const PROPERTIES = [
       tr: "Akbukte mustakil Villa 4+1 havuzlu",
       en: "From akbuk 4 bedrom swimming pool"
     },
-    price: 3500000,
+    price: 35000000,
     currency: "TRY",
     status: "sale",  // sale | rent | sold
     type: "villa",  // villa | daire | arsa | isyeri
