@@ -218,7 +218,7 @@ const PROPERTIES = [
       tr: "Didim efeler mahallesi 4+1 havuzlu",
       en: "From didim efeler 4 Bedroom swiming pool"
     },
-    price: 2600000,
+    price: 26000000,
     currency: "TRY",
     status: "sale",  // sale | rent | sold
     type: "villa",  // villa | daire | arsa | isyeri
